@@ -129,7 +129,6 @@ export class FormComponent implements OnInit {
     }
   }
 
-
   get validTelefono() {
     return this.formg.get('telefono').invalid && this.formg.get('telefono').dirty;
   }
@@ -150,6 +149,9 @@ export class FormComponent implements OnInit {
   }
   get validNumTel() {
     return this.formg.get('telefono').hasError('pattern');
+  }
+  get validFormtCorreo() {
+    return this.formg.get('correo').hasError('pattern');
   }
 
 }

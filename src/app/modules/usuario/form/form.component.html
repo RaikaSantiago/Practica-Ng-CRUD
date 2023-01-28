@@ -72,9 +72,13 @@
         <div>
           <label>Correo:</label>
           <input type="text" formControlName="correo" [ngClass]="{'is-invalid': validCorreo, 'is-valid': formg.get('correo').valid }" class="form-control" placeholder="Correo">
-          <div class="invalid-feedback">
+          <div *ngIf="!validFormtCorreo" class="invalid-feedback">
             Campo requerido!
           </div>
+          <div *ngIf="validFormtCorreo" class="invalid-feedback">
+            Correo invalido!
+          </div>
+          
         </div>
       </div>
     </div>
