@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { appReducers, metaReducers } from 'src/app/app.reducer';
 
 import { FormComponent } from './form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -8,7 +12,16 @@ describe('FormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormComponent ]
+      declarations: [ FormComponent ],
+      imports:[
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        StoreModule.forRoot(appReducers, { metaReducers })
+      ],
+      providers:[
+        
+      ]
     })
     .compileComponents();
   });
