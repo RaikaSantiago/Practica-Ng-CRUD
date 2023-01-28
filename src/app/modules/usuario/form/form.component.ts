@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResponseMessageModel, UsuarioModel } from 'src/app/models/usuario.model';
 import { UsuariosService } from '../../../services/modules/usuarios/usuarios.service';
 import Swal from 'sweetalert2';
+import { AppState } from 'src/app/app.reducer';
+import { Store } from '@ngrx/store';
+import * as usuariosActions from '../../../ngrx/store/actions/usuarios.actions';
 
 @Component({
   selector: 'app-form',
@@ -19,6 +22,7 @@ export class FormComponent implements OnInit {
   loading: boolean = false;
 
   constructor(private fb: FormBuilder,
+    private store: Store<AppState>,
     private _usuarios: UsuariosService) {
 
   }
@@ -68,6 +72,7 @@ export class FormComponent implements OnInit {
             showConfirmButton: false,
             timer: 2500
           })
+          this.store.dispatch(usuariosActions.updateListUsuarios({ id: res.usuario.id, usuario: res.usuario }));
         } else {
           Swal.fire({
             icon: 'warning',
@@ -89,7 +94,7 @@ export class FormComponent implements OnInit {
       })
       /**Mode Create */
     } else {
-      await this._usuarios.postGuardarUsuario('usuario', this.formg.value ).toPromise().then((res: ResponseMessageModel) => {
+      await this._usuarios.postGuardarUsuario('usuario', this.formg.value).toPromise().then((res: ResponseMessageModel) => {
         if (res.status !== 400) {
           Swal.fire({
             position: 'top-end',
@@ -98,6 +103,7 @@ export class FormComponent implements OnInit {
             showConfirmButton: false,
             timer: 2000
           })
+          this.store.dispatch(usuariosActions.addUsuario({ usuario: res.usuario }));
           setTimeout(() => {
             this.dismiss();
           }, 2000);
