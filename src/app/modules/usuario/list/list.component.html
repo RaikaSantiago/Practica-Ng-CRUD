@@ -1,0 +1,96 @@
+<ng-container *ngIf="loading">
+    <div class="text-center jqbox_innerhtml">
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="arrUsers.length === 0 && !loading">
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                <h1>USUARIOS</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                <div>
+                    <img src="./assets/images/79572-empty-state.gif" height="300" alt="" />
+                </div>
+                <h5>No se encontraron usuarios para esta consulta, desea agregar un usuario ?</h5>
+                <br>
+                <a (click)="open(content)" style="cursor: pointer;" tooltip="Agregar Usuario" placement="top"
+                    showDelay="500" class="ov-btn-slide-left">
+                    <i class="fa fa-user-plus icon-usermas" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="arrUsers.length > 0 && !loading">
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                <h1 class="h1-vol">USUARIOS</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">CÉDULA</th>
+                            <th scope="col">NOMBRES</th>
+                            <th scope="col">APELLIDOS</th>
+                            <th scope="col">TELEFONO</th>
+                            <th scope="col">CORREO</th>
+                            <th class="text-center" scope="col">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of arrUsers | slice: (page -1) * pageSize : page * pageSize; let i=index ">
+                            <th scope="row">{{i + 1}}</th>
+                            <td>{{user.cedula}}</td>
+                            <td>{{user.nombres}}</td>
+                            <td>{{user.apellidos}}</td>
+                            <td>{{user.telefono}}</td>
+                            <td>{{user.correo}}</td>
+                            <td>
+                                <div class="text-center">
+                                    <button (click)="open(content, user)" type="button"
+                                        style="font-size:small;margin-right: 3px;" tooltip="Editar Registro"
+                                        placement="top" showDelay="500" class="btn btn-primary"><i class="fa fa-pencil"
+                                            aria-hidden="true"></i></button>
+                                    <button (click)="deleteR(user.id)" type="button" style="font-size: small;"
+                                        tooltip="Eliminar Registro" placement="top" showDelay="500"
+                                        class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="pageSize" [collectionSize]="arrUsers.length"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                <a style="cursor: pointer;" (click)="open(content)" tooltip="Agregar Usuario" placement="top"
+                    showDelay="500" class="ov-btn-slide-left">
+                    <i class="fa fa-user-plus icon-usermas" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #content let-dismiss="dismiss">
+    <app-form [data]="dataSelect" [dismiss]="dismiss"></app-form>
+</ng-template>

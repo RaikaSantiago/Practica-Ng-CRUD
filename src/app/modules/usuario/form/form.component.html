@@ -1,0 +1,85 @@
+<form [formGroup]="formg" (ngSubmit)="submit()">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">FORM USUARIO!
+      <ng-container *ngIf="isMode; else elseTemplate">
+        <span > - MODO EDICIÓN</span>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <span > - MODO CREACIÓN</span>
+      </ng-template>
+      
+    </h4>
+    <button type="button" (click)="dismiss()" class="btn btn-outline-danger" aria-label="Close"><i class="fa fa-times"
+        aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngIf="loading">
+      <div class="text-center">
+          <div class="lds-ripple"><div></div><div></div></div>
+          <div>
+            Cargando...
+          </div>
+      </div>
+  </ng-container>
+    <div class="row p-10">
+      <div class="col">
+        <div>
+          <label>Cédula:</label>
+          <input type="text" [ngClass]="{'is-invalid': validCedula, 'is-valid': formg.get('cedula').valid }" formControlName="cedula" class="form-control" placeholder="Cédula">
+          <div *ngIf="!validNumCed" class="invalid-feedback">
+            Campo requerido!
+          </div>
+          <div *ngIf="validNumCed" class="invalid-feedback">
+            El campo debe ser númerico!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row p-10">
+      <div class="col">
+        <div>
+          <label>Nombres:</label>
+          <input type="text" [ngClass]="{'is-invalid': validNombre, 'is-valid': formg.get('nombres').valid }" formControlName="nombres" class="form-control" placeholder="Nombres">
+          <div class="invalid-feedback">
+            Campo requerido!
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <label>Apellidos:</label>
+          <input type="text" [ngClass]="{'is-invalid': validApellidos, 'is-valid': formg.get('apellidos').valid }" formControlName="apellidos" class="form-control" placeholder="Apellidos">
+          <div class="invalid-feedback">
+            Campo requerido!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row p-10">
+      <div class="col">
+        <div>
+          <label>Telefono:</label>
+          <input type="text" formControlName="telefono" [ngClass]="{'is-invalid': validTelefono, 'is-valid': formg.get('telefono').valid }" class="form-control" placeholder="Telefono">
+          <div *ngIf="!validNumTel" class="invalid-feedback">
+            Campo requerido!
+          </div>
+          <div *ngIf="validNumTel" class="invalid-feedback">
+            El campo debe ser númerico!
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <label>Correo:</label>
+          <input type="text" formControlName="correo" [ngClass]="{'is-invalid': validCorreo, 'is-valid': formg.get('correo').valid }" class="form-control" placeholder="Correo">
+          <div class="invalid-feedback">
+            Campo requerido!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" [disabled]="formg.invalid" class="btn btn-success">Guardar</button>
+  </div>
+</form>
