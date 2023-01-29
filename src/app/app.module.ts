@@ -4,12 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioModule } from './modules/usuario/usuario.module';
-import { UtilModule } from './util/util.module';
 import { GlobalModule } from './modules/global.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducers, metaReducers } from './app.reducer';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { appReducers, metaReducers } from './app.reducer';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    UtilModule,
+    SharedModule,
     UsuarioModule,
     GlobalModule,
     StoreModule.forRoot(appReducers, { metaReducers }),
