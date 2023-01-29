@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { appReducers, metaReducers } from '../../../app.reducer';
+import { appReducers, metaReducers } from '../../../../app/app.reducer';
 
-import { FormComponent } from './form.component';
+import { FormComponent } from '../../../../app/modules/usuario/form/form.component';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('FormComponent', () => {

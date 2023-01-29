@@ -52,6 +52,9 @@
     "setupFilesAfterEnv": [
       "<rootDir>/setup-jest.ts"
     ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
     "globalSetup": "jest-preset-angular/global-setup"
   }
 }
